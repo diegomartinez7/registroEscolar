@@ -93,6 +93,7 @@ public class DashboardWindow extends JFrame {
 		
 		JLabel alumnoImage = new JLabel("");
 		alumnoImage.setHorizontalAlignment(SwingConstants.CENTER);
+		alumnoImage.setIcon(Helper.getImage("img/student.png"));
 		alumnoImage.setBounds(10, 0, 70, 61);
 		alumnoPanel.add(alumnoImage);
 		
@@ -110,6 +111,7 @@ public class DashboardWindow extends JFrame {
 		
 		JLabel calificacionesImage = new JLabel("");
 		calificacionesImage.setHorizontalAlignment(SwingConstants.CENTER);
+		calificacionesImage.setIcon(Helper.getImage("img/grades.png"));
 		calificacionesImage.setBounds(10, 0, 70, 61);
 		calificacionesPanel.add(calificacionesImage);
 		

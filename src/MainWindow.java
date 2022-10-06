@@ -163,7 +163,11 @@ public class MainWindow extends JFrame {
 				//Comprobamos que usuario y contraseña sean correctos
 				if(checkUser(userText.getText(), passwordField.getText())) {
 					//Mandamos una ventana emergente con un mensaje de éxito
-					JOptionPane.showMessageDialog(null, "Credenciales correctas. Bienvenido@ " + userName);
+					JOptionPane.showMessageDialog(null, "Credenciales correctas.\nBienvenid@ " + userName);
+					
+					DashboardWindow dashboard = new DashboardWindow();
+					dashboard.setVisible(true);
+					MainWindow.this.dispose();
 				}
 				else {
 					//Mandamos un mensaje de advertencia
@@ -206,19 +210,15 @@ public class MainWindow extends JFrame {
 	}
 	
 	public boolean checkUser(String userInput, String passwordInput) {
-		ArrayList<String> auxUsers = this.getDataFromTxt(0); // 0 para usuarios
+		ArrayList<String[]> auxAccounts = this.getDataFromFile(); // 0 para usuarios
 		boolean bandStatus = false;
 		
-		for(String user : auxUsers) {
-			if(user.equals(userInput)) {
-				ArrayList<String> auxPasswd = this.getDataFromTxt(1); // 1 para passwd
-				
-				for(String passwd : auxPasswd) {
-					if(passwd.equals(passwordInput)) {
-						bandStatus = true;
-						this.userName = user;
-						break;
-					}
+		for(String account[] : auxAccounts) {
+			if(account[0].equals(userInput)) {
+				if(account[1].equals(passwordInput)) {
+					bandStatus = true;
+					this.userName = account[0];
+					break;
 				}
 			}
 		}
@@ -227,8 +227,8 @@ public class MainWindow extends JFrame {
 	}
 	
 	
-	private ArrayList<String> getDataFromTxt(int option) {
-		ArrayList<String> data = new ArrayList<String>();
+	private ArrayList<String[]> getDataFromFile() {
+		ArrayList<String[]> data = new ArrayList<String[]>();
 		
 		try {
 			File file = new File(this.fileName);
@@ -237,11 +237,8 @@ public class MainWindow extends JFrame {
 			
 			while(sc.hasNext()) {
 				String tokens[] = sc.next().split(";");
-				
-				switch(option) {
-					case 0: data.add(tokens[0]); break;
-					case 1: data.add(tokens[1].replaceAll("\\R", "")); break;
-				}
+				tokens[1] = tokens[1].replaceAll("\\R", "");
+				data.add(tokens);
 			}
 			
 			sc.close();
