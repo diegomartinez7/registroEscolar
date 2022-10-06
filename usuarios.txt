@@ -2,3 +2,5 @@ diego;mrsym
 uls.alvirde;congreso
 kevin;agroin
 max;steel
+granola;muerefreezer
+bardock;premoniciones
