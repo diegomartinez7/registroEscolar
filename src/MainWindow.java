@@ -18,6 +18,11 @@ import java.awt.Image;
 import javax.swing.border.LineBorder;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
@@ -27,6 +32,8 @@ public class MainWindow extends JFrame {
 	private JPanel contentPane;
 	private JTextField userText;
 	private JPasswordField passwordField;
+	protected String fileName = "usuarios.txt";
+	public String userName;
 
 	/**
 	 * Launch the application.
@@ -154,9 +161,9 @@ public class MainWindow extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				//Comprobamos que usuario y contraseña sean correctos
-				if(userText.getText().equals("uls.alvirde") && passwordField.getText().equals("congreso")) {
+				if(checkUser(userText.getText(), passwordField.getText())) {
 					//Mandamos una ventana emergente con un mensaje de éxito
-					JOptionPane.showMessageDialog(null, "Credenciales correctas. Inicio de sesión exitoso.");
+					JOptionPane.showMessageDialog(null, "Credenciales correctas. Bienvenido@ " + userName);
 				}
 				else {
 					//Mandamos un mensaje de advertencia
@@ -196,5 +203,53 @@ public class MainWindow extends JFrame {
 		signinLabel.setIcon(Helper.getImage("img/add_user.png"));
 		signinLabel.setBounds(615, 461, 75, 78);
 		contentPane.add(signinLabel);
+	}
+	
+	public boolean checkUser(String userInput, String passwordInput) {
+		ArrayList<String> auxUsers = this.getDataFromTxt(0); // 0 para usuarios
+		boolean bandStatus = false;
+		
+		for(String user : auxUsers) {
+			if(user.equals(userInput)) {
+				ArrayList<String> auxPasswd = this.getDataFromTxt(1); // 1 para passwd
+				
+				for(String passwd : auxPasswd) {
+					if(passwd.equals(passwordInput)) {
+						bandStatus = true;
+						this.userName = user;
+						break;
+					}
+				}
+			}
+		}
+		
+		return bandStatus;
+	}
+	
+	
+	private ArrayList<String> getDataFromTxt(int option) {
+		ArrayList<String> data = new ArrayList<String>();
+		
+		try {
+			File file = new File(this.fileName);
+			Scanner sc = new Scanner(file);
+			sc.useDelimiter("\n");
+			
+			while(sc.hasNext()) {
+				String tokens[] = sc.next().split(";");
+				
+				switch(option) {
+					case 0: data.add(tokens[0]); break;
+					case 1: data.add(tokens[1].replaceAll("\\R", "")); break;
+				}
+			}
+			
+			sc.close();
+		}
+		catch(FileNotFoundException e) {
+			System.out.println(e);
+		}
+		
+		return data;
 	}
 }
