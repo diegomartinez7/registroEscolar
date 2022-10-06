@@ -74,11 +74,11 @@ public class SignInWindow extends JFrame {
 		tituloLabel.setBounds(0, 81, 700, 25);
 		contentPane.add(tituloLabel);
 		
-		JLabel notebookLabel = new JLabel("");
-		notebookLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		notebookLabel.setBounds(0, 123, 700, 97);
-		notebookLabel.setIcon(Helper.getScaledImage("img/registration_form.png", 85, 90));
-		contentPane.add(notebookLabel);
+		JLabel formLabel = new JLabel("");
+		formLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		formLabel.setBounds(0, 123, 700, 97);
+		formLabel.setIcon(Helper.getScaledImage("img/registration_form.png", 85, 90));
+		contentPane.add(formLabel);
 		
 		JPanel userPanel = new JPanel();
 		userPanel.setBackground(new Color(250, 235, 215));
@@ -150,7 +150,7 @@ public class SignInWindow extends JFrame {
 						
 						//Mandamos un mensaje de advertencia
 						JOptionPane.showMessageDialog(null, "Registro exitoso",
-							"Advertencia", JOptionPane.WARNING_MESSAGE);
+							"Éxito", JOptionPane.PLAIN_MESSAGE);
 						
 						changeWindow();
 					}
