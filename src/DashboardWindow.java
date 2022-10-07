@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
@@ -15,6 +16,7 @@ import javax.swing.border.LineBorder;
 public class DashboardWindow extends JFrame {
 
 	private JPanel contentPane;
+	private JLabel seccionLabel;
 
 	public DashboardWindow() {
 		setTitle("Panel de control");
@@ -68,8 +70,26 @@ public class DashboardWindow extends JFrame {
 		dashboardPanel.add(dashboardLabel);
 		
 		JPanel materiaPanel = new JPanel();
+		materiaPanel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				seccionLabel.setText("Módulo de materias");
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				materiaPanel.setBackground(new Color(233, 150, 122));
+				materiaPanel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+				materiaPanel.setBounds(2, 219, 255, 61);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				materiaPanel.setBackground(new Color(250, 128, 114));
+				materiaPanel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+				materiaPanel.setBounds(2, 219, 253, 61);
+			}
+		});
 		materiaPanel.setBackground(new Color(250, 128, 114));
-		materiaPanel.setBounds(10, 219, 237, 61);
+		materiaPanel.setBounds(2, 219, 253, 61);
 		dashboardPanel.add(materiaPanel);
 		materiaPanel.setLayout(null);
 		
@@ -86,8 +106,26 @@ public class DashboardWindow extends JFrame {
 		materiaPanel.add(materiaLabel);
 		
 		JPanel alumnoPanel = new JPanel();
+		alumnoPanel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				seccionLabel.setText("Módulo de alumnos");
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				alumnoPanel.setBackground(new Color(233, 150, 122));
+				alumnoPanel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+				alumnoPanel.setBounds(2, 291, 255, 61);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				alumnoPanel.setBackground(new Color(250, 128, 114));
+				alumnoPanel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+				alumnoPanel.setBounds(2, 291, 253, 61);
+			}
+		});
 		alumnoPanel.setBackground(new Color(250, 128, 114));
-		alumnoPanel.setBounds(10, 291, 237, 61);
+		alumnoPanel.setBounds(2, 291, 253, 61);
 		dashboardPanel.add(alumnoPanel);
 		alumnoPanel.setLayout(null);
 		
@@ -104,8 +142,26 @@ public class DashboardWindow extends JFrame {
 		alumnoPanel.add(alumnoLabel);
 		
 		JPanel calificacionesPanel = new JPanel();
+		calificacionesPanel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				seccionLabel.setText("Módulo de calificaciones");
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				calificacionesPanel.setBackground(new Color(233, 150, 122));
+				calificacionesPanel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+				calificacionesPanel.setBounds(2, 363, 255, 61);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				calificacionesPanel.setBackground(new Color(250, 128, 114));
+				calificacionesPanel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+				calificacionesPanel.setBounds(2, 363, 253, 61);
+			}
+		});
 		calificacionesPanel.setBackground(new Color(250, 128, 114));
-		calificacionesPanel.setBounds(10, 363, 237, 61);
+		calificacionesPanel.setBounds(2, 363, 253, 61);
 		dashboardPanel.add(calificacionesPanel);
 		calificacionesPanel.setLayout(null);
 		
@@ -120,5 +176,17 @@ public class DashboardWindow extends JFrame {
 		calificacionesLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
 		calificacionesLabel.setBounds(85, 0, 142, 61);
 		calificacionesPanel.add(calificacionesLabel);
+		
+		JPanel seccionPanel = new JPanel();
+		seccionPanel.setBackground(new Color(250, 235, 215));
+		seccionPanel.setBounds(279, 38, 548, 588);
+		contentPane.add(seccionPanel);
+		seccionPanel.setLayout(null);
+		
+		seccionLabel = new JLabel("No se ha presionado sobre alguna sección");
+		seccionLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		seccionLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		seccionLabel.setBounds(0, 273, 548, 31);
+		seccionPanel.add(seccionLabel);
 	}
 }
